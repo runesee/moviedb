@@ -1,0 +1,118 @@
+@@startuml class-diagram
+
+class Movie
+{
+    -runtime : int
+    ==
+    +getRuntime() : int
+    +setRuntime()
+}
+
+class MovieDatabase
+{
+    -movies : List<Movie> 
+    ==
+    +addMovie() : boolean
+    +addMovieUnchecked()
+    +removeMovie() : boolean
+    +getMovies() : List<Movie>
+    +setMovies()
+    -movieAlreadySaved() : boolean
+}
+
+Movie <-- MovieDatabase: movies: *
+
+abstract class AbstractMedia 
+{
+    #name : String
+    #releaseYear : int
+    #genres : List<String>
+    #rating : double
+    ==
+    +getName() : String
+    +setName()
+    +getReleaseYear() : int
+    +setReleaseYear()
+    +getGenres() : List<String>
+    +setGenres()
+    +addGenre()
+    +getRating() : double
+    +setRating()
+    +genreToString() : String
+}
+
+Movie <|-- AbstractMedia
+Series <|-- AbstractMedia
+
+abstract class AbstractObservableDatabase 
+{
+    #observers : Collection<DatabaseObserver>
+    ==
+    +addObserver()
+    +{abstract} notifyObservers()
+}
+
+MovieDatabase <|-- AbstractObservableDatabase 
+SeriesDatabase <|-- AbstractObservableDatabase 
+
+class Series
+{
+    -seasons : int
+    ==
+    +getSeasons() : int
+    +setSeasons()
+}
+class SeriesDatabase
+{
+    -seriesList : List<Series> 
+    ==
+    +addSeries() : boolean
+    +addSeriesUnchecked()
+    +removeSeries() : boolean
+    +getSeries() : List<Series>
+    +setSeries()
+    -seriesAlreadySaved() : boolean
+}
+
+Series <-- SeriesDatabase: series: *
+
+class MovieDatabaseRepository
+{
+    -moviedbWebClient : MoviedbWebClient
+    -movieDatabase : MovieDatabase
+    -{static} baseURI : String
+    ==
+    +getMovies() : MovieDatabase
+    +setMovies()
+}
+
+class SeriesDatabaseRepository
+{
+    -moviedbWebClient : MoviedbWebClient
+    -seriesDatabase : SeriesDatabase
+    -{static} baseURI : String
+    ==
+    +getSeries() : SeriesDatabase
+    +setSeries()
+}
+
+class MoviedbRestController
+{
+    -movieDatabaseRepository : MovieDatabaseRepository
+    -seriesDatabaseRepository : SeriesDatabaseRepository
+    +{static} SERVICE_PATH : String
+    ==
+    +getMovies() : MovieDatabase
+    +setMovies()
+    +getSeries() : SeriesDatabase
+    +setSeries()
+    +getStatus() : String
+}
+
+MovieDatabase <-- MovieDatabaseRepository: movieDatabase
+SeriesDatabase <-- SeriesDatabaseRepository: seriesDatabase
+
+MovieDatabaseRepository <-- MoviedbRestController: movieDatabaseRepository
+SeriesDatabaseRepository <-- MoviedbRestController: seriesDatabaseRepository
+
+@@enduml

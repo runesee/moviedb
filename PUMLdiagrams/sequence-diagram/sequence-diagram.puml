@@ -1,0 +1,14 @@
+@@startuml sequence-diagram
+
+actor User #LightYellow
+
+User -> "~#addMovie: Button" as MovieButton: click
+MovieButton -> MenuController: handleAdd
+MenuController -> MovieDatabase: addMovie
+MenuController -> MenuController: updateGui
+MovieDatabase -> RemoteDatabaseSaver: notifyDatabaseChanged
+RemoteDatabaseSaver -> MoviedbWebClient: updateRemoteMovies
+MoviedbWebClient -> server: httpRequest (PUT)
+MoviedbWebClient <<-- server: response: 201 (Created)
+
+@@enduml

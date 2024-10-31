@@ -1,0 +1,9 @@
+/.idea/
+/.vscode/
+/moviedb/.idea/
+/moviedb/parent.iml
+/moviedb/core/core.iml
+/moviedb/fxui/fxui.iml
+/moviedb/rest/rest.iml
+/moviedb/core/src/main/resources/moviedb/core/movies.json
+/moviedb/core/src/main/resources/moviedb/core/series.json

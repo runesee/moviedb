@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.MenuButton?>
+<?import javafx.scene.control.RadioButton?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.ToggleGroup?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<ScrollPane fx:id="scrollPane" fitToHeight="true" fitToWidth="true" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1">
+  <content>
+    <TabPane fx:id="tabPane" tabClosingPolicy="UNAVAILABLE">
+        <tabs>
+          <Tab fx:id="movieTab" text="Movies">
+            <content>
+              <VBox style="-fx-padding: 15;">
+                 <children>
+                        <HBox style="-fx-padding: 15;">
+                           <children>
+                          <ChoiceBox fx:id="movieSortChoiceBox" prefWidth="150.0" />
+                          <Button fx:id="movieSortButton" mnemonicParsing="false" onAction="#handleSort" text="Sort" />
+                           </children>
+                        </HBox>
+                    <ScrollPane fx:id="movieScrollPane" style="-fx-background-color: transparent; -fx-padding: 15;">
+                        <content>
+                          <GridPane fx:id="movieGridPane" style="-fx-vgap: 50; -fx-hgap: 50;" />
+                        </content>
+                    </ScrollPane>
+                 </children>
+              </VBox>
+           </content>
+          </Tab>
+          <Tab fx:id="seriesTab" text="Series">
+            <content>
+              <VBox style="-fx-padding: 15;">
+                 <children>
+                        <HBox style="-fx-padding: 15;">
+                           <children>
+                          <ChoiceBox fx:id="seriesSortChoiceBox" prefWidth="150.0" />
+                          <Button fx:id="seriesSortButton" mnemonicParsing="false" onAction="#handleSort" text="Sort" />
+                           </children>
+                        </HBox>
+                    <ScrollPane fx:id="seriesScrollPane" style="-fx-background-color: transparent; -fx-padding: 15;">
+                        <content>
+                          <GridPane fx:id="seriesGridPane" style="-fx-vgap: 50; -fx-hgap: 50;" />
+                        </content>
+                    </ScrollPane>
+                 </children>
+              </VBox>
+           </content>
+          </Tab>
+          <Tab fx:id="addTab" text="Add Movie/Series">
+               <content>
+                  <ScrollPane fx:id="addScrollPane" style="-fx-padding: 15;">
+                     <content>
+                        <VBox fx:id="vBox" style="-fx-spacing: 10;">
+                           <children>
+                              <Label text="Select which media to add:">
+                                 <font>
+                                    <Font size="14.0" />
+                                 </font>
+                              </Label>
+                              <RadioButton fx:id="radioMovie" mnemonicParsing="false" onAction="#handleRadio" selected="true" text="Movie">
+                                 <toggleGroup>
+                                    <ToggleGroup fx:id="media" />
+                                 </toggleGroup>
+                              </RadioButton>
+                              <RadioButton fx:id="radioSeries" mnemonicParsing="false" onAction="#handleRadio" text="Series" toggleGroup="$media" />
+                              <Label text="Name:" />
+                              <TextField fx:id="nameField" maxWidth="400.0" onKeyTyped="#handleInputChanged" prefWidth="100.0" promptText="Name" />
+                              <Label text="Release Year:" />
+                              <TextField fx:id="releaseYearField" maxWidth="400.0" onAction="#handleInputChanged" onKeyTyped="#handleInputChanged" prefWidth="100.0" promptText="Release year" />
+                              <Label text="Genres:" />
+                              <MenuButton fx:id="menuButton" mnemonicParsing="false" text="Select genres" />
+                              <Label fx:id="runtimeSeasonsLabel" text="Runtime (min):" />
+                              <TextField fx:id="runtimeSeasonsField" maxWidth="400.0" onAction="#handleInputChanged" onKeyTyped="#handleInputChanged" prefWidth="100.0" promptText="Runtime" />
+                              <Label text="Your rating (1-10):" />
+                              <TextField fx:id="ratingField" maxHeight="-Infinity" maxWidth="400.0" onAction="#handleInputChanged" onKeyTyped="#handleInputChanged" promptText="Rating" />
+                              <Button fx:id="imageButton" disable="true" mnemonicParsing="false" onAction="#handleImage" text="Add image (optional)" />
+                              <Button fx:id="confirmButton" disable="true" mnemonicParsing="false" onAction="#handleAdd" text="Confirm" />
+                           </children>
+                        </VBox>
+                     </content>
+                  </ScrollPane>
+               </content>
+          </Tab>
+        </tabs>
+      </TabPane>
+  </content>
+</ScrollPane>

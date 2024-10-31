@@ -1,0 +1,32 @@
+@@startuml package-diagram
+
+component core {
+    package moviedb.core #lightyellow
+    package moviedb.json #lightyellow
+}
+moviedb.json -[#red,dashed]-> [jackson]
+
+component fxui {
+    package moviedb.ui #lightyellow
+}
+
+component javafx {
+    component fxml
+}
+fxui -[#red,dashed]-> javafx
+fxui -[#red,dashed]-> fxml
+
+component rest {
+    package moviedb.rest #lightyellow
+}
+
+
+
+rest -[#red,dashed]-> [Spring]
+
+moviedb.ui -[#red,dashed]-> moviedb.core
+moviedb.ui -[#red,dashed]-> moviedb.json
+moviedb.rest -[#red,dashed]-> moviedb.core
+moviedb.rest -[#red,dashed]-> moviedb.json
+
+@@enduml
